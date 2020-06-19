@@ -1,0 +1,12 @@
+#!/usr/bin/env xdg-open
+
+[Desktop Entry]
+Version=1.0
+Type = Application
+Terminal = False
+Exec = python3 /home/animesh/WTA/movie_recommendation/manage.py runserver
+Name = Web
+Comment = Something
+Icon = /home/animesh/WTA/movie_recommendation/logo.png
+Path = /home/animesh/WTA/movie_recommendation/
+Categories = Utility;Application;
