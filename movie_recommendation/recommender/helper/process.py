@@ -1,5 +1,13 @@
 import subprocess
 import os 
+import sys
+
+
+HELPER_DIR = os.path.dirname(os.path.abspath(__file__))
+TRAINER_DIR = os.path.join(os.path.dirname(HELPER_DIR), 'trainer')
+RUN_SCRIPT = os.path.join(HELPER_DIR, 'run.sh')
+INPUT_FILE = os.path.join(TRAINER_DIR, 'input.txt')
+OUTPUT_FILE = os.path.join(TRAINER_DIR, 'test_out.txt')
 
 
 def printToFile(Arr, n, m):
@@ -10,7 +18,7 @@ def printToFile(Arr, n, m):
 			temp.append(0)
 		mat.append(temp)
 
-	f=open("/home/animesh/WTA/movie_recommendation/recommender/trainer/input.txt","w")
+	f=open(INPUT_FILE,"w")
 	for tup in Arr:
 		print(tup)
 		mat[tup[0]][tup[1]] = tup[2]
@@ -29,7 +37,7 @@ def generate_data_to_process(Arr, n, m):
 
 
 def returnMatrix():
-	with open("/home/animesh/WTA/movie_recommendation/recommender/trainer/test_out.txt") as textFile:
+	with open(OUTPUT_FILE) as textFile:
 		lines=[line.split() for line in textFile]
 	
 	return lines
@@ -37,7 +45,7 @@ def returnMatrix():
 
 
 def get_recommended_movies():
-	subprocess.run(["bash", "/home/animesh/WTA/movie_recommendation/recommender/helper/run.sh" ])
+	subprocess.run(["bash", RUN_SCRIPT, TRAINER_DIR, sys.executable], check=True)
 	a=returnMatrix()
 	return a
 	

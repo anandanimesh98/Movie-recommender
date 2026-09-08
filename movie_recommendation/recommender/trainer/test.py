@@ -1,8 +1,12 @@
+import os
+
 import numpy as np
 import em
 import common
 
-X = np.loadtxt("/home/animesh/WTA/movie_recommendation/recommender/trainer/input.txt")
+TRAINER_DIR = os.path.dirname(os.path.abspath(__file__))
+
+X = np.loadtxt(os.path.join(TRAINER_DIR, "input.txt"))
 # X_gold = np.loadtxt("test_complete.txt")
 
 K = 4
@@ -43,7 +47,7 @@ X_pred = em.fill_matrix(X, common.GaussianMixture(mu, var, p))
 # error = common.rmse(X_gold, X_pred)
 # print("X_gold:\n" + str(X_gold))
 # X_pred = np.round(X_pred)
-fil = open('/home/animesh/WTA/movie_recommendation/recommender/trainer/test_file.txt','w')
+fil = open(os.path.join(TRAINER_DIR, 'test_file.txt'),'w')
 fil.write(str(n)+' '+str(d)+'\n')
 for i in X_pred:
 	for j in i:

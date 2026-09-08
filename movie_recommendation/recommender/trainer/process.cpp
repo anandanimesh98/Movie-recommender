@@ -1,4 +1,10 @@
-#include <bits/stdc++.h>
+#include <algorithm>
+#include <cstdint>
+#include <cstdio>
+#include <iostream>
+#include <string>
+#include <utility>
+#include <vector>
 
 using namespace std;
 #define f first 
@@ -11,9 +17,14 @@ bool compare(pair<double,int> a,pair<double,int> b){
 	return false;
 }
 
-int32_t main(){
-	freopen("/home/animesh/WTA/movie_recommendation/recommender/trainer/test_file.txt","r",stdin);
-	freopen("/home/animesh/WTA/movie_recommendation/recommender/trainer/test_out.txt","w",stdout);
+int32_t main(int argc, char **argv){
+	// the trainer directory is passed in by run.sh so the data files are found
+	// relative to the checkout rather than an absolute path
+	string dir = (argc > 1) ? argv[1] : ".";
+	if(!dir.empty() && dir.back() != '/') dir += '/';
+
+	freopen((dir + "test_file.txt").c_str(),"r",stdin);
+	freopen((dir + "test_out.txt").c_str(),"w",stdout);
 	int n,m;
 	cin>>n>>m;
 	vector<pair<double,int>> v[n];
@@ -27,7 +38,7 @@ int32_t main(){
 		}
 		sort(v[i].begin(),v[i].end(),compare);
 	}
-	freopen("/home/animesh/WTA/movie_recommendation/recommender/trainer/input.txt","r",stdin); // The Original Input file 
+	freopen((dir + "input.txt").c_str(),"r",stdin); // The Original Input file 
 	double b4[n][m];
 	for(int i=0;i<n;++i)
 		for(int j=0;j<m;++j)cin>>b4[i][j];
