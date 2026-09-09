@@ -18,8 +18,8 @@ bool compare(pair<double,int> a,pair<double,int> b){
 }
 
 int32_t main(int argc, char **argv){
-	// the trainer directory is passed in by run.sh so the data files are found
-	// relative to the checkout rather than an absolute path
+	// the trainer directory is passed in by the caller so the data files are
+	// found relative to the checkout rather than an absolute path
 	string dir = (argc > 1) ? argv[1] : ".";
 	if(!dir.empty() && dir.back() != '/') dir += '/';
 
