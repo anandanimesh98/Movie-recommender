@@ -1,12 +1,13 @@
 #Contains set of all callback functions to execute
 
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 
 
 def home_page(req):
-	#return HttpResponse('home page')
-	if req.method == 'POST':
-		print(req.POST)
-	return render(req, 'homepage.html')
+	# the landing page is the login form; signed in users go straight to
+	# their recommendations instead of being shown it again
+	if req.user.is_authenticated:
+		return redirect('/recommender/' + req.user.username + '/')
+	return redirect('accounts:login')
 
